@@ -62,11 +62,13 @@ const Peer = window.Peer;
     }
   });
 
-  peer.once('open', id => (localId.textContent = id));
-
+  peer.once('open', id => {
+    localId.textContent = id;
+    
   peer.listAllPeers((peers)=>{
     idList.textContent = peers.join(',')
-  })
+  });
+                          });
 
   // Register connected peer handler
   peer.on('connection', dataConnection => {
