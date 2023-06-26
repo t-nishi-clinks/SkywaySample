@@ -11,6 +11,8 @@ const Peer = window.Peer;
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
 
+  const idList = document.getElementById('js-id-list');
+
   meta.innerText = `
     UA: ${navigator.userAgent}
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
@@ -61,6 +63,10 @@ const Peer = window.Peer;
   });
 
   peer.once('open', id => (localId.textContent = id));
+
+  peer.listAllPeers((peers)=>{
+    idList.textContent = peers.join(',')
+  })
 
   // Register connected peer handler
   peer.on('connection', dataConnection => {
